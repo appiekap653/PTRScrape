@@ -1,0 +1,163 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "fileMatch": ["ptrscrape.json", ".ptrscrape.yml"],
+    "$id": "https://raw.githubusercontent.com/appiekap653/ptrscrape/master/schemas/config-schema.json",
+    "type": "object",
+    "additionalProperties": false,
+    "patternProperties": {
+      "trackers": {
+        "type": "object",
+        "description": "Main trackers object.",
+        "patternProperties": {
+            "^.*$": {
+                "type": "object",
+                "additionalProperties": false,
+                "description": "Name of your tracker.",
+                "required": ["url", "ratio"],
+                "properties": {
+                  "url": {
+                    "type": "string",
+                    "description": "The URL of your tracker's profile. This must point to a page which contains your ratio as text. When also using downloadtag and uploadtag make sure those values are also present on this page.",
+                    "examples": [
+                      "http://tracker.com",
+                      "https://tracker.com",
+                      "https://tracker.com/profile"
+                    ]
+                  },
+                  "login": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "description": "Login tag. You can use: username and password or cookie.",
+                    "minProperties": 1,
+                    "maxProperties": 3,
+                    "properties": {
+                      "cookie": {
+                        "type": "string",
+                        "description": "The cookie needed to access your tracker's profile page. Can use a filepath ex: /run/secrets/cookiefile to use Docker secrets.",
+                        "examples": [
+                          "member_id=12345; pass_hash=1a3d2g445fd44; uid=345678; pass=1a3d2g445fd44;"
+                        ]
+                      },
+                      "username": {
+                        "type": "string",
+                        "description": "Your tracker's username. Can use a filepath ex: /run/secrets/userfile to use Docker secrets.",
+                        "examples": [
+                          "user123"
+                        ]
+                      },
+                      "password": {
+                        "type": "string",
+                        "description": "Your tracker's password. Can use a filepath ex: /run/secrets/passfile to use Docker secrets.",
+                        "examples": [
+                          "password123"
+                        ]
+                      }
+                    }
+                  },
+                  "ratio": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "description": "Ratio. You can use 'HTMLelement' or 'XPath' for identifying your ratio on the page.",
+                    "minProperties": 1,
+                    "maxProperties": 1,
+                    "properties": {
+                      "HTMLelement": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "The defined XPath containing your ratio.",
+                        "examples": [
+                          "<span class=profile-info-details profile-ratio-details>"
+                        ]
+                      },
+                      "XPath": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "The defined XPath containing your ratio.",
+                        "examples": [
+                          "/html/body/div[4]/div/div/div/div[3]/div/div/div/table/tbody/tr[1]/td[2]/div[2]/div[3]/span"
+                        ]
+                      }
+                    }
+                  },
+                  "buffer": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "description": "Buffer. You can use 'HTMLelement' or 'XPath' for identifying your buffer on the page.",
+                    "minProperties": 1,
+                    "maxProperties": 1,
+                    "properties": {
+                      "HTMLelement": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "The defined HTML element containing your buffer.",
+                        "examples": [
+                          "<span class=profile-info-details profile-buffer-details>"
+                        ]
+                      },
+                      "XPath": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "The defined XPath containing your buffer.",
+                        "examples": [
+                          "/html/body/div[4]/div/div/div/div[3]/div/div/div/table/tbody/tr[1]/td[2]/div[2]/div[3]/span"
+                        ]
+                      }
+                    }
+                  },
+                  "downloaded": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "description": "Downloaded. You can use 'HTMLelement' or 'XPath' for identifying your download on the page.",
+                    "minProperties": 1,
+                    "maxProperties": 1,
+                    "properties": {
+                      "HTMLelement": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "The defined HTML element containing your downloaded bytes.",
+                        "examples": [
+                          "<span class=profile-info-details profile-download-details>"
+                        ]
+                      },
+                      "XPath": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "The defined XPath containing your downloaded bytes.",
+                        "examples": [
+                          "/html/body/div[4]/div/div/div/div[3]/div/div/div/table/tbody/tr[1]/td[2]/div[2]/div[3]/span"
+                        ]
+                      }
+                    }
+                  },
+                  "uploaded": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "description": "Uploaded. You can use 'HTMLelement' or 'XPath' for identifying your upload on the page.",
+                    "minProperties": 1,
+                    "maxProperties": 1,
+                    "properties": {
+                      "HTMLelement": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "The defined HTML element containing your uploaded bytes.",
+                        "examples": [
+                          "<span class=profile-info-details profile-upload-details>"
+                        ]
+                      },
+                      "XPath": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "The defined XPath containing your uploaded bytes.",
+                        "examples": [
+                          "/html/body/div[4]/div/div/div/div[3]/div/div/div/table/tbody/tr[1]/td[2]/div[2]/div[3]/span"
+                        ]
+                      }
+                    }
+                  }
+                }
+            }
+        }
+      }
+    }
+  }
+  
