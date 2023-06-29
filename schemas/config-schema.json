@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
-    "fileMatch": ["ptrscrape.json", ".ptrscrape.yml"],
+    "fileMatch": ["ptrscrape.yaml", "ptrscrape.yml"],
     "$id": "https://raw.githubusercontent.com/appiekap653/PTRScrape/main/schemas/config-schema.json",
     "type": "object",
     "additionalProperties": false,
